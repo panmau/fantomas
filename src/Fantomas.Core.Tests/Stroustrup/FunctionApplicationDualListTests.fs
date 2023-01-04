@@ -102,3 +102,29 @@ fn
         b2
     ]
 """
+
+[<Test>]
+let ``Two lists given directly as parameters shouldn't break code, 2681`` () =
+    formatSourceString
+        false
+        """
+Layout.twoColumnLayoutWithStyles
+    styles
+    [ element1 longParameterName1 param2 param3; element1 longParameterName1 param2 param3 ] 
+    [ element1 longParameterName1 param2 param3; element1 longParameterName1 param2 param3 ]
+"""
+        config
+    |> prepend newline
+    |> should
+        equal
+        """
+Layout.twoColumnLayoutWithStyles styles
+    [
+        element1 longParameterName1 param2 param3
+        element1 longParameterName1 param2 param3
+    ] 
+    [
+        element1 longParameterName1 param2 param3
+        element1 longParameterName1 param2 param3
+    ]
+"""

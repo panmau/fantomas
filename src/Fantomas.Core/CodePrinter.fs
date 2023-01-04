@@ -1375,6 +1375,7 @@ let genExpr (e: Expr) =
                 else
                     genExpr node.FunctionExpr
                     +> sepSpace
+                    +> onlyIfNot node.SequentialExpr.IsEmpty sepSpace
                     +> col sepSpace node.SequentialExpr genExpr
                     +> genExpr node.FirstArrayOrList
                     +> sepSpace
